@@ -1,9 +1,9 @@
-import * as React from "react"
-import Link from "next/link"
-import { Globe } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ThemeToggle } from "@/components/common/theme-toggle"
 import { Logo } from "@/components/ui/logo"
 import { cn } from "@/lib/utils"
+import { Globe } from "lucide-react"
+import Link from "next/link"
+import * as React from "react"
 
 function GithubIcon(props: React.ComponentProps<"svg">) {
   return (

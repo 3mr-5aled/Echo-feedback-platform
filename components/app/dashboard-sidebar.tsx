@@ -1,24 +1,22 @@
 "use client"
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { AccountToggleCard } from "@/components/app/account-toggle-card"
+import { useSidebar } from "@/components/app/sidebar-context"
+import { Button } from "@/components/ui/button"
+import { Logo } from "@/components/ui/logo"
+import { cn } from "@/lib/utils"
 import {
   BarChart3,
   ChevronsLeft,
   ChevronsRight,
   Columns3,
   LayoutDashboard,
-  Milestone,
   Settings,
-  Sparkles,
-  X,
+  X
 } from "lucide-react"
-import { useSidebar } from "@/components/app/sidebar-context"
-import { Logo } from "@/components/ui/logo"
-import { AccountToggleCard } from "@/components/app/account-toggle-card"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import * as React from "react"
 
 export interface NavItem {
   label: string
@@ -29,8 +27,6 @@ export interface NavItem {
 export const DASHBOARD_NAV_ITEMS: NavItem[] = [
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
   { label: "Boards", href: "/dashboard/boards", icon: Columns3 },
-  { label: "Roadmap", href: "/dashboard/roadmap", icon: Milestone },
-  { label: "Changelog", href: "/dashboard/changelog", icon: Sparkles },
   { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
   { label: "Settings", href: "/dashboard/settings", icon: Settings },
 ]

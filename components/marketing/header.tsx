@@ -1,11 +1,11 @@
 "use client"
 
-import * as React from "react"
-import Link from "next/link"
-import { ArrowRight, Menu, X } from "lucide-react"
+import { ThemeToggle } from "@/components/common/theme-toggle"
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Logo } from "@/components/ui/logo"
+import { ArrowRight, Menu, X } from "lucide-react"
+import Link from "next/link"
+import * as React from "react"
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },

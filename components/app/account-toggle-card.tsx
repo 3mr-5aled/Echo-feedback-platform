@@ -1,12 +1,12 @@
 "use client"
 
-import * as React from "react"
+import { useSidebar } from "@/components/app/sidebar-context"
+import { ThemeToggle } from "@/components/common/theme-toggle"
+import { cn } from "@/lib/utils"
+import { ChevronsUpDown, LogOut, Settings, User } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ChevronsUpDown, LogOut, Settings, User } from "lucide-react"
-import { useSidebar } from "@/components/app/sidebar-context"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { cn } from "@/lib/utils"
+import * as React from "react"
 
 export interface UserProfile {
   name: string

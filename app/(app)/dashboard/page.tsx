@@ -1,7 +1,9 @@
+import { PageHeader } from "@/components/common/page-header";
+
 export default function DashboardPage() {
     return (
         <div>
-            <h1>Dashboard</h1>
+            <PageHeader title="Dashboard" subtitle="Organize and Overview your Boards" />
         </div>
     )
 }

@@ -15,26 +15,38 @@ const SidebarContext = React.createContext<SidebarContextValue | undefined>(unde
 
 const STORAGE_KEY = "echo_sidebar_collapsed"
 
+// Custom event to sync collapse state within the client
+const STORAGE_EVENT = "echo_sidebar_collapse_change"
+
+function subscribe(callback: () => void) {
+  window.addEventListener(STORAGE_EVENT, callback)
+  window.addEventListener("storage", callback)
+  return () => {
+    window.removeEventListener(STORAGE_EVENT, callback)
+    window.removeEventListener("storage", callback)
+  }
+}
+
+function getSnapshot(): boolean {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === "true"
+  } catch {
+    return false
+  }
+}
+
+function getServerSnapshot(): boolean {
+  return false
+}
+
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  const [isCollapsed, setIsCollapsedState] = React.useState<boolean>(false)
+  const isCollapsed = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
   const [isMobileOpen, setIsMobileOpen] = React.useState<boolean>(false)
 
-  // Hydrate collapsed state from localStorage after mount
-  React.useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (stored !== null) {
-        setIsCollapsedState(stored === "true")
-      }
-    } catch {
-      // localStorage may be unavailable in private browsing mode
-    }
-  }, [])
-
   const setCollapsed = React.useCallback((value: boolean) => {
-    setIsCollapsedState(value)
     try {
       localStorage.setItem(STORAGE_KEY, String(value))
+      window.dispatchEvent(new Event(STORAGE_EVENT))
     } catch {
       // ignore
     }

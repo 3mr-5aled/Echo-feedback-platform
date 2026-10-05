@@ -5,26 +5,15 @@ import { useForm } from "react-hook-form";
 
 const SignForm = ({ type }: { type: 'sign-in' | 'sign-up' }) => {
     const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState<string | null>(null);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
+    const [isLoading] = useState(false);
     const handleSignIn = () => {
         router.replace('/dashboard');
-        setSuccess('Sign in successful');
-        setError(null);
     }
     const handleSignUp = () => {
-        router.push('/sign-in');
-        setSuccess('Sign up successful');
-        setError(null);
+        router.push('/login');
     }
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = (_data: Record<string, unknown>) => {
         if (type === 'sign-in') {
             handleSignIn();
         } else {

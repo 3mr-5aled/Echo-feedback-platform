@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { ChevronsUpDown, LogOut, Settings, User } from "lucide-react"
 import { useSidebar } from "@/components/app/sidebar-context"
 import { cn } from "@/lib/utils"
@@ -25,6 +26,7 @@ interface AccountToggleCardProps {
 }
 
 export function AccountToggleCard({ user = DEFAULT_USER, className }: AccountToggleCardProps) {
+  const router = useRouter()
   const { isCollapsed, setMobileOpen } = useSidebar()
   const [isOpen, setIsOpen] = React.useState(false)
   const menuRef = React.useRef<HTMLDivElement>(null)
@@ -167,7 +169,7 @@ export function AccountToggleCard({ user = DEFAULT_USER, className }: AccountTog
             role="menuitem"
             onClick={() => {
               setIsOpen(false)
-              window.location.href = "/login"
+              router.push("/login")
             }}
             className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive transition-colors hover:bg-destructive/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
           >

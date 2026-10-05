@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ChevronsUpDown, LogOut, Settings, User } from "lucide-react"
 import { useSidebar } from "@/components/app/sidebar-context"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
 
 export interface UserProfile {
@@ -135,6 +136,14 @@ export function AccountToggleCard({ user = DEFAULT_USER, className }: AccountTog
               </span>
             )}
           </div>
+
+          {/* Theme switcher inside popover */}
+          <div className="flex items-center justify-between px-2.5 py-1.5 text-xs text-muted-foreground">
+            <span className="font-medium text-foreground">Theme</span>
+            <ThemeToggle variant="outline" className="size-7 rounded-lg" />
+          </div>
+
+          <div className="my-1 border-t border-border/60" />
 
           <Link
             href="/dashboard/profile"

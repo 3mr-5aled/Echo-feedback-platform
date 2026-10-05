@@ -16,7 +16,6 @@ import {
 } from "lucide-react"
 import { useSidebar } from "@/components/app/sidebar-context"
 import { Logo } from "@/components/ui/logo"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { AccountToggleCard } from "@/components/app/account-toggle-card"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -55,8 +54,8 @@ export function DashboardSidebar() {
       <div className="flex flex-col gap-4">
         <div
           className={cn(
-            "flex h-12 items-center px-1 transition-all duration-200",
-            isCollapsed ? "justify-center" : "justify-between"
+            "flex items-center px-1 transition-all duration-200",
+            isCollapsed ? "flex-col gap-2 justify-center py-1" : "h-12 justify-between"
           )}
         >
           <Logo
@@ -67,18 +66,37 @@ export function DashboardSidebar() {
             href="/dashboard"
           />
 
-          {/* Mobile drawer close button */}
-          <div className="flex md:hidden">
+          <div className="flex items-center gap-1">
+            {/* Desktop collapse button beside the logo */}
             <Button
               type="button"
               variant="ghost"
               size="icon"
-              className="size-8 rounded-lg"
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close sidebar"
+              onClick={toggleCollapsed}
+              aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              className="hidden md:flex size-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-sidebar-accent cursor-pointer"
             >
-              <X className="size-4" aria-hidden="true" />
+              {isCollapsed ? (
+                <ChevronsRight className="size-4" aria-hidden="true" />
+              ) : (
+                <ChevronsLeft className="size-4" aria-hidden="true" />
+              )}
             </Button>
+
+            {/* Mobile drawer close button */}
+            <div className="flex md:hidden">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="size-8 rounded-lg"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close sidebar"
+              >
+                <X className="size-4" aria-hidden="true" />
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -117,39 +135,8 @@ export function DashboardSidebar() {
         </nav>
       </div>
 
-      {/* Bottom Utility Footer & Account Toggle Card */}
-      <div className="flex flex-col gap-3 pt-3 border-t border-sidebar-border">
-        {/* Utilities: ThemeToggle + Collapse button */}
-        <div
-          className={cn(
-            "flex items-center gap-1",
-            isCollapsed ? "flex-col justify-center" : "justify-between px-1"
-          )}
-        >
-          <ThemeToggle
-            variant="ghost"
-            className="size-8 rounded-lg text-muted-foreground hover:text-foreground"
-          />
-
-          {/* Desktop-only collapse trigger */}
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            onClick={toggleCollapsed}
-            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            className="hidden md:flex size-8 rounded-lg text-muted-foreground hover:text-foreground cursor-pointer"
-          >
-            {isCollapsed ? (
-              <ChevronsRight className="size-4" aria-hidden="true" />
-            ) : (
-              <ChevronsLeft className="size-4" aria-hidden="true" />
-            )}
-          </Button>
-        </div>
-
-        {/* Account Toggle Card */}
+      {/* Bottom Account Toggle Card */}
+      <div className="pt-3 border-t border-sidebar-border">
         <AccountToggleCard />
       </div>
     </div>

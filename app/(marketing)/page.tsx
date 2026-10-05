@@ -1,23 +1,23 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <h1 className="text-4xl font-bold">Home</h1>
-      <p className="text-lg text-gray-600">
-        Welcome to the home page of the Echo Feedback Platform.
+    <div className="flex flex-col items-center justify-center py-20 text-center">
+      <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground font-sans">
+        Echo Feedback Platform
+      </h1>
+      <p className="mt-4 max-w-xl text-lg text-muted-foreground">
+        Welcome to the home page of the Echo Feedback Platform. Collect feedback, prioritize with votes, and build transparent roadmaps.
       </p>
-      <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-        <Link href="/login">Get Started</Link>
-      </button>
-      <nav>
-        <Link href="/login">Login</Link>
-        <Link href="/signup">Signup</Link>
-        <Link href="/dashboard">Dashboard</Link>
-        <Link href="/board">Board</Link>
-        <Link href="/feedback">Feedback</Link>
-        <Link href="/new-board">New Board</Link>
-      </nav>
+      <div className="mt-8 flex items-center gap-3">
+        <Button asChild size="lg" className="rounded-xl shadow-xs">
+          <Link href="/signup">Get Started</Link>
+        </Button>
+        <Button variant="outline" asChild size="lg" className="rounded-xl">
+          <Link href="/login">Sign In</Link>
+        </Button>
+      </div>
     </div>
   );
 }
